@@ -1,6 +1,6 @@
 // shortcuts-data.js
 // Excellent Institute - Complete Shortcut Keys Guide (Basic to Advance)
-// Expanded Edition with hundreds of professional shortcuts.
+// Expanded Edition: Added Advanced MS Office, Web Dev, Python/Java IDE, and DTP shortcuts.
 
 const shortcutBookData = [
     {
@@ -40,6 +40,7 @@ const shortcutBookData = [
                     { keys: ["Win", "Left Arrow"], action: "Snap the current window to the left half of the screen." },
                     { keys: ["Win", "Right Arrow"], action: "Snap the current window to the right half of the screen." },
                     { keys: ["Win", "Tab"], action: "Open Task View (See all open windows and Virtual Desktops)." },
+                    { keys: ["Win", "Ctrl", "D"], action: "Create a brand new Virtual Desktop to hide your current work." },
                     { keys: ["Win", "Shift", "S"], action: "Open Snipping Tool for a custom screenshot." }
                 ]
             },
@@ -60,14 +61,17 @@ const shortcutBookData = [
         title: "Chapter 2: MS Word Professional",
         topics: [
             {
-                heading: "Text Formatting (Basic)",
+                heading: "Text Formatting (Basic & Advanced)",
                 text: "Make your documents look professional without touching the Ribbon menu.",
                 shortcuts: [
                     { keys: ["Ctrl", "B"], action: "Make text Bold." },
                     { keys: ["Ctrl", "I"], action: "Make text Italic." },
                     { keys: ["Ctrl", "U"], action: "Underline the text." },
+                    { keys: ["Ctrl", "Shift", "D"], action: "Double Underline the text (Great for main titles)." },
                     { keys: ["Ctrl", "Shift", ">"], action: "Increase font size." },
                     { keys: ["Ctrl", "Shift", "<"], action: "Decrease font size." },
+                    { keys: ["Ctrl", "="], action: "Subscript (e.g., H₂O)." },
+                    { keys: ["Ctrl", "Shift", "+"], action: "Superscript (e.g., X²)." },
                     { keys: ["Ctrl", "Spacebar"], action: "Clear all formatting (returns text to normal)." }
                 ]
             },
@@ -93,6 +97,8 @@ const shortcutBookData = [
                     { keys: ["Ctrl", "Shift", "C"], action: "Copy formatting only (Format Painter)." },
                     { keys: ["Ctrl", "Shift", "V"], action: "Paste formatting only." },
                     { keys: ["Ctrl", "K"], action: "Insert a Hyperlink (Web Link)." },
+                    { keys: ["Alt", "Shift", "D"], action: "Insert the current Date automatically." },
+                    { keys: ["Alt", "Shift", "T"], action: "Insert the current Time automatically." },
                     { keys: ["F7"], action: "Run Spelling and Grammar check." }
                 ]
             }
@@ -122,19 +128,23 @@ const shortcutBookData = [
                     { keys: ["Ctrl", ";"], action: "Insert today's Date instantly." },
                     { keys: ["Ctrl", "Shift", ":"], action: "Insert the current Time instantly." },
                     { keys: ["Ctrl", "D"], action: "Fill Down (Copies the exact cell above it)." },
+                    { keys: ["Ctrl", "R"], action: "Fill Right (Copies the cell to the left)." },
                     { keys: ["Ctrl", "E"], action: "Flash Fill (Excel's AI magically recognizes patterns and fills data)." }
                 ]
             },
             {
-                heading: "Formulas & Magic Formatting",
-                text: "Handle numbers like a seasoned accountant.",
+                heading: "Formulas & Structure Control",
+                text: "Handle rows, columns, and numbers like a seasoned accountant.",
                 shortcuts: [
                     { keys: ["Alt", "="], action: "AutoSum! Instantly adds up all numbers above it." },
                     { keys: ["F4"], action: "Lock a cell reference (makes it absolute, e.g., $A$1) while typing a formula." },
+                    { keys: ["Ctrl", "Shift", "+"], action: "Insert a new Row or Column." },
+                    { keys: ["Ctrl", "-"], action: "Delete the selected Row or Column." },
+                    { keys: ["Ctrl", "9"], action: "Hide the selected Row." },
+                    { keys: ["Ctrl", "0"], action: "Hide the selected Column." },
                     { keys: ["Ctrl", "Shift", "$"], action: "Format numbers as Currency (₹ / $)." },
                     { keys: ["Ctrl", "Shift", "%"], action: "Format numbers as Percentages." },
-                    { keys: ["Ctrl", "Shift", "L"], action: "Turn on/off Filters for your columns." },
-                    { keys: ["F11"], action: "Instantly create a Chart from your selected data in a new tab." }
+                    { keys: ["Ctrl", "Shift", "L"], action: "Turn on/off Filters for your columns." }
                 ]
             }
         ]
@@ -217,6 +227,7 @@ const shortcutBookData = [
                 heading: "Reports & Configuration",
                 text: "Navigate financial reports and tweak Tally settings.",
                 shortcuts: [
+                    { keys: ["Alt", "G"], action: "Go To Feature (Tally Prime Only - Instantly search any report!)." },
                     { keys: ["Alt", "F1"], action: "View a report in Detailed Format (Expands groups)." },
                     { keys: ["Alt", "P"], action: "Print the current invoice or report." },
                     { keys: ["Alt", "E"], action: "Export the current report to Excel or PDF." },
@@ -242,7 +253,8 @@ const shortcutBookData = [
                     { keys: ["]"], action: "Increase Brush Size." },
                     { keys: ["Spacebar"], action: "Hold to use the Hand Tool (Drag the canvas)." },
                     { keys: ["Ctrl", "+"], action: "Zoom In." },
-                    { keys: ["Ctrl", "-"], action: "Zoom Out." }
+                    { keys: ["Ctrl", "-"], action: "Zoom Out." },
+                    { keys: ["Ctrl", "0"], action: "Fit image to screen." }
                 ]
             },
             {
@@ -251,10 +263,22 @@ const shortcutBookData = [
                 shortcuts: [
                     { keys: ["Ctrl", "J"], action: "Duplicate the current Layer." },
                     { keys: ["Ctrl", "Shift", "N"], action: "Create a New empty Layer." },
+                    { keys: ["Ctrl", "E"], action: "Merge the current layer with the layer below it." },
                     { keys: ["Ctrl", "T"], action: "Free Transform (Resize/Rotate objects)." },
                     { keys: ["Ctrl", "D"], action: "Deselect (Removes the marching ants)." },
-                    { keys: ["Ctrl", "Shift", "I"], action: "Invert Selection (Selects the background instead of the object)." },
-                    { keys: ["Ctrl", "Alt", "Shift", "E"], action: "Stamp Visible (Merges all visible layers into a new single layer)." }
+                    { keys: ["Ctrl", "Shift", "I"], action: "Invert Selection (Selects the background instead of the object)." }
+                ]
+            },
+            {
+                heading: "Colors & Saving",
+                text: "Vital shortcuts for digital printing and web export.",
+                shortcuts: [
+                    { keys: ["D"], action: "Reset foreground/background colors to default Black and White." },
+                    { keys: ["X"], action: "Swap Foreground and Background colors." },
+                    { keys: ["Alt", "Backspace"], action: "Fill selection with Foreground Color." },
+                    { keys: ["Ctrl", "Backspace"], action: "Fill selection with Background Color." },
+                    { keys: ["Ctrl", "Y"], action: "Proof Colors (Preview how it will look in CMYK print)." },
+                    { keys: ["Ctrl", "Alt", "Shift", "S"], action: "Save for Web (Optimize images for the internet)." }
                 ]
             }
         ]
@@ -298,6 +322,7 @@ const shortcutBookData = [
                 shortcuts: [
                     { keys: ["Ctrl", "L"], action: "Jump straight to the Address/URL bar to type a website." },
                     { keys: ["F5"], action: "Refresh / Reload the page." },
+                    { keys: ["Ctrl", "F"], action: "Find a specific word on the current webpage." },
                     { keys: ["Ctrl", "D"], action: "Bookmark the current webpage." },
                     { keys: ["Ctrl", "H"], action: "Open Browsing History." },
                     { keys: ["Ctrl", "J"], action: "Open the Downloads page." },
@@ -314,6 +339,7 @@ const shortcutBookData = [
                 heading: "Coding Speed & Formatting",
                 text: "Write HTML, CSS, JavaScript, and Python faster.",
                 shortcuts: [
+                    { keys: ["!", "Enter"], action: "Emmet: Instantly generate standard HTML boilerplate structure." },
                     { keys: ["Shift", "Alt", "F"], action: "Format Document: Auto-aligns and cleans up messy code." },
                     { keys: ["Ctrl", "/"], action: "Toggle Line Comment (Turns code into a note)." },
                     { keys: ["Alt", "Click"], action: "Multi-Cursor: Click multiple places to type everywhere at once." },
@@ -327,8 +353,9 @@ const shortcutBookData = [
                 shortcuts: [
                     { keys: ["Ctrl", "P"], action: "Quick Open: Search and open any file in your project." },
                     { keys: ["Ctrl", "Shift", "P"], action: "Command Palette (Access all VS Code features)." },
+                    { keys: ["Ctrl", "B"], action: "Show/Hide the left Sidebar (Explorer) for more coding space." },
                     { keys: ["Ctrl", "`"], action: "Toggle the integrated Terminal (Key above Tab)." },
-                    { keys: ["Ctrl", "B"], action: "Show/Hide the left Sidebar (Explorer)." }
+                    { keys: ["Ctrl", "F5"], action: "Run Code (Starts Python, Java, or C program without debugging)." }
                 ]
             }
         ]
@@ -354,6 +381,40 @@ const shortcutBookData = [
                     { keys: ["Win", "P"], action: "Project settings (Switch between PC screen, Duplicate, or Projector)." },
                     { keys: ["Win", "X"], action: "Open the secret Windows Admin menu (Device manager, Disk management)." },
                     { keys: ["Win", "V"], action: "Clipboard History: See a list of the last 20 things you copied!" }
+                ]
+            }
+        ]
+    },
+    {
+        id: "chapter12",
+        title: "Chapter 12: CorelDRAW (Bonus DTP)",
+        topics: [
+            {
+                heading: "Flex & Banner Design Tools",
+                text: "Essential shortcuts for Desktop Publishing and large format printing.",
+                shortcuts: [
+                    { keys: ["F4"], action: "Zoom to All Objects (Fits everything you drew on the screen)." },
+                    { keys: ["Shift", "F2"], action: "Zoom to Selected (Zooms in perfectly on the object you clicked)." },
+                    { keys: ["P"], action: "Center to Page (Moves the selected object perfectly to the center of the canvas)." },
+                    { keys: ["Ctrl", "Q"], action: "Convert to Curves (Turns text into a shape so the font doesn't break when printing)." },
+                    { keys: ["Ctrl", "G"], action: "Group Objects." },
+                    { keys: ["Ctrl", "U"], action: "Ungroup Objects." }
+                ]
+            }
+        ]
+    },
+    {
+        id: "chapter13",
+        title: "Chapter 13: Everyday Typing Secrets",
+        topics: [
+            {
+                heading: "Special Characters & Symbols",
+                text: "How to type symbols that aren't on your physical keyboard.",
+                shortcuts: [
+                    { keys: ["Ctrl", "Alt", "4"], action: "Type the Indian Rupee Symbol (₹) on standard keyboards." },
+                    { keys: ["Alt", "0176"], action: "Type the Degree Symbol (°) for temperature or angles." },
+                    { keys: ["Alt", "0169"], action: "Type the Copyright Symbol (©)." },
+                    { keys: ["Alt", "0153"], action: "Type the Trademark Symbol (™)." }
                 ]
             }
         ]
