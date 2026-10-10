@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excellent Institute - Shortcut Master Guide</title>
+    <!-- Modern Font Integration -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Premium Color Palette */
+            --primary: #1e40af; 
+            --primary-light: #eff6ff;
+            --accent: #3b82f6;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --surface: #ffffff;
+            --background: #f8fafc; 
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+            --radius: 12px;
+        }
+        
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--background);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            letter-spacing: -0.01em;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 10;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .toggle-btn:hover { background-color: var(--primary-light); }
+
+        .brand h2 { margin: 0; color: var(--primary); font-size: 1.3rem; font-weight: 700; cursor: pointer; }
+
+        /* Action Buttons (Print & Game) */
+        .action-btns { display: flex; gap: 10px; }
+        .btn-game {
+            background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: transform 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+        .btn-game:hover { transform: scale(1.05); box-shadow: var(--shadow-md); }
+        
+        .btn-print {
+            background-color: var(--surface);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn-print:hover { background-color: var(--background); }
+
+        /* Main Layout & Sidebar */
+        .main-container { display: flex; flex: 1; overflow: hidden; }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 24px 16px;
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar.collapsed { width: 0; padding: 24px 0; opacity: 0; border: none; }
+        
+        .nav-label {
+            font-size: 0.75rem; text-transform: uppercase; font-weight: 700;
+            color: var(--text-muted); margin-bottom: 10px; padding-left: 12px;
+        }
+
+        .nav-btn {
+            display: flex; align-items: center; width: 100%; padding: 12px 16px;
+            border: none; background: none; text-align: left; font-size: 0.95rem;
+            font-weight: 600; color: var(--text-muted); cursor: pointer;
+            border-radius: var(--radius); transition: all 0.2s ease; white-space: nowrap;
+        }
+        .nav-btn:hover { background-color: var(--background); color: var(--text-main); }
+        .nav-btn.active { background-color: var(--primary-light); color: var(--primary); }
+
+        /* Content Area */
+        .content-area {
+            flex: 1; padding: 40px 60px; overflow-y: auto; scroll-behavior: smooth;
+        }
+
+        .content-wrapper {
+            max-width: 1000px; margin: 0 auto; background: var(--surface);
+            padding: 40px 50px; border-radius: var(--radius);
+            box-shadow: var(--shadow-md); animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography */
+        h1 { color: var(--text-main); font-size: 2.2rem; font-weight: 800; border-bottom: 2px solid var(--border); padding-bottom: 15px; margin-top: 0;}
+        h3 { color: var(--primary); font-size: 1.4rem; margin-top: 40px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        p { line-height: 1.7; font-size: 1.1rem; color: #334155; }
+
+        /* Dashboard Grid */
+        .hero { text-align: center; margin-bottom: 40px; }
+        .hero h1 { font-size: 2.8rem; border: none; color: var(--primary); }
+        .hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;}
+        
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; margin-top: 30px;}
+        .module-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+            padding: 24px; cursor: pointer; transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+        }
+        .module-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
+        .card-icon { font-size: 2rem; margin-bottom: 15px; background: var(--primary-light); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 12px; }
+        .module-card h3 { margin: 0 0 10px 0; color: var(--text-main); font-size: 1.2rem; border: none; padding: 0;}
+        
+        /* ⌨️ Mechanical Keyboard Key Styling ⌨️ */
+        .shortcut-list { margin-top: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .shortcut-item {
+            display: flex; align-items: center; padding: 15px 20px;
+            background-color: var(--background); border-radius: 10px;
+            border-left: 4px solid var(--accent); transition: transform 0.2s;
+        }
+        .shortcut-item:hover { transform: translateX(5px); background-color: var(--primary-light); }
+        
+        .keys { flex: 0 0 40%; display: flex; align-items: center; gap: 5px; flex-wrap: wrap;}
+        .action { flex: 1; font-size: 1.05rem; color: #1e293b; font-weight: 500;}
+        
+        .kbd-style {
+            display: inline-block;
+            background-color: #f1f5f9;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-bottom: 3px solid #94a3b8;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 900;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+            text-shadow: 0 1px 0 #fff;
+        }
+
+        /* Plus sign between keys */
+        .key-plus { font-weight: bold; color: var(--text-muted); font-size: 1.2rem; }
+
+        /* Game UI */
+        .quiz-container { text-align: center; padding: 20px; }
+        .score-board { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 10px 20px; border-radius: 20px; font-weight: 700; font-size: 1.2rem; margin-bottom: 30px; }
+        .question-box { font-size: 1.5rem; color: var(--text-main); margin-bottom: 30px; font-weight: 600; padding: 20px; background: var(--background); border-radius: var(--radius); border: 2px dashed var(--border);}
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; max-width: 600px; margin: 0 auto; }
+        .option-btn {
+            background: var(--surface); border: 2px solid var(--border); padding: 15px; border-radius: var(--radius);
+            font-size: 1.1rem; cursor: pointer; transition: all 0.2s;
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 5px;
+        }
+        .option-btn:hover { border-color: var(--accent); background: var(--primary-light); transform: translateY(-2px); }
+        .option-btn.correct { background: #d1fae5; border-color: var(--success); color: #065f46; }
+        .option-btn.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container { flex-direction: column; }
+            .sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 12px; }
+            .sidebar.collapsed { display: none; }
+            .nav-label { display: none; }
+            .nav-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); }
+            .content-area { padding: 20px 15px; }
+            .content-wrapper { padding: 25px 20px; }
+            .shortcut-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .keys { width: 100%; }
+            .options-grid { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            .sidebar, .header, .hero, .btn-game { display: none !important; }
+            .content-area { padding: 0; }
+            .content-wrapper { box-shadow: none; max-width: 100%; padding: 0;}
+            h1 { page-break-before: always; }
+            .shortcut-item { border: 1px solid #ccc; break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="brand">
+            <button class="toggle-btn" onclick="toggleSidebar()" title="Toggle Menu">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <h2 onclick="loadDashboard()">Excellent Institute</h2>
+        </div>
+        <div class="action-btns">
+            <button class="btn-game" onclick="startQuiz()">🎮 Play Quiz</button>
+            <button class="btn-print" onclick="window.print()">🖨️ Print Notes</button>
+        </div>
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="main-container">
+        
+        <!-- Sidebar -->
+        <div class="sidebar" id="main-sidebar">
+            <div class="nav-label">Course Contents</div>
+            <button class="nav-btn active" onclick="loadDashboard()" id="home-btn">🏠 Home Dashboard</button>
+            <div id="nav-container" style="display: flex; flex-direction: column; gap: 6px;">
+                <!-- JS Inject Chapters -->
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area" id="content-display">
+            <!-- JS Inject Content -->
+        </div>
+    </div>
+
+    <!-- Load Data File -->
+    <script src="shortcuts-data.js"></script>
+    
+    <script>
+        const navContainer = document.getElementById('nav-container');
+        const contentDisplay = document.getElementById('content-display');
+        const sidebar = document.getElementById('main-sidebar');
+        
+        let allShortcutsList = []; // Used for the quiz
+
+        // 1. Initialize
+        function initApp() {
+            if (typeof shortcutBookData === 'undefined') {
+                contentDisplay.innerHTML = `<h2 style="color:red; text-align:center;">Error: shortcuts-data.js missing.</h2>`;
+                return;
+            }
+            
+            shortcutBookData.forEach((chapter, index) => {
+                // Generate Sidebar Nav
+                const btn = document.createElement('button');
+                btn.className = 'nav-btn note-nav-btn';
+                btn.innerHTML = `📘 ${chapter.title.split(':')[0]}`; 
+                btn.onclick = () => loadContent(index, btn);
+                navContainer.appendChild(btn);
+
+                // Collect all shortcuts for the game
+                chapter.topics.forEach(topic => {
+                    if(topic.shortcuts) {
+                        allShortcutsList = allShortcutsList.concat(topic.shortcuts);
+                    }
+                });
+            });
+            
+            loadDashboard();
+        }
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('collapsed');
+        }
+
+        // 2. Load Home Dashboard
+        function loadDashboard() {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('home-btn').classList.add('active');
+
+            let html = `
+            <div class="content-wrapper">
+                <div class="hero">
+                    <h1>Shortcut Master Guide</h1>
+                    <p>Designed perfectly for students from 8th class and above to build lightning-fast computer skills. Click a module below to start learning!</p>
+                </div>
+                <div class="dashboard-grid">`;
+            
+            shortcutBookData.forEach((chapter, index) => {
+                html += `
+                    <div class="module-card" onclick="document.querySelectorAll('.note-nav-btn')[${index}].click()">
+                        <div class="card-icon">⌨️</div>
+                        <h3>${chapter.title}</h3>
+                        <span>${chapter.topics.length} Topics</span>
+                    </div>`;
+            });
+
+            html += `</div></div>`;
+            contentDisplay.innerHTML = html;
+        }
+
+        // 3. Load Chapter Content & Format Keys
+        function loadContent(index, clickedBtn) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            if(clickedBtn) clickedBtn.classList.add('active');
+
+            const chapter = shortcutBookData[index];
+
+            let html = `
+            <div class="content-wrapper">
+                <h1>${chapter.title}</h1>`;
+            
+            chapter.topics.forEach(topic => {
+                html += `<h3>${topic.heading}</h3><p>${topic.text}</p>`;
+                
+                if(topic.shortcuts) {
+                    html += `<div class="shortcut-list">`;
+                    topic.shortcuts.forEach(sc => {
+                        // Generate the mechanical keys HTML
+                        let keysHtml = sc.keys.map(k => `<kbd class="kbd-style">${k}</kbd>`).join('<span class="key-plus"> + </span>');
+                        
+                        html += `
+                        <div class="shortcut-item">
+                            <div class="keys">${keysHtml}</div>
+                            <div class="action">${sc.action}</div>
+                        </div>`;
+                    });
+                    html += `</div>`;
+                }
+            });
+            html += `</div>`;
+            
+            contentDisplay.innerHTML = html;
+            contentDisplay.scrollTop = 0;
+            
+            if(window.innerWidth <= 768) sidebar.classList.add('collapsed');
+        }
+
+        // ==========================================
+        // 🎮 FUN ACTIVITY: SHORTCUT MASTER QUIZ 🎮
+        // ==========================================
+        let score = 0;
+        let currentQuestionObj = null;
+
+        function formatKeysForQuiz(keyArray) {
+            return keyArray.map(k => `<kbd class="kbd-style" style="font-size:0.8rem; padding: 2px 8px;">${k}</kbd>`).join(' + ');
+        }
+
+        function startQuiz() {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            score = 0;
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            // Pick a random shortcut to test
+            const correctIndex = Math.floor(Math.random() * allShortcutsList.length);
+            currentQuestionObj = allShortcutsList[correctIndex];
+
+            // Generate 3 random wrong answers
+            let options = [currentQuestionObj];
+            while (options.length < 4) {
+                let randomWrong = allShortcutsList[Math.floor(Math.random() * allShortcutsList.length)];
+                // Make sure we don't duplicate options
+                if (!options.some(opt => JSON.stringify(opt.keys) === JSON.stringify(randomWrong.keys))) {
+                    options.push(randomWrong);
+                }
+            }
+
+            // Shuffle the options
+            options.sort(() => Math.random() - 0.5);
+
+            let html = `
+            <div class="content-wrapper quiz-container">
+                <div class="score-board">🏆 Score: ${score}</div>
+                <h2>Shortcut Master Challenge!</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Read the action and guess the correct keyboard shortcut.</p>
+                
+                <div class="question-box">
+                    " ${currentQuestionObj.action} "
+                </div>
+                
+                <div class="options-grid">`;
+
+            options.forEach((opt, idx) => {
+                html += `<button class="option-btn" onclick="checkAnswer(${idx}, '${JSON.stringify(opt.keys)}', '${JSON.stringify(currentQuestionObj.keys)}', this)">
+                            ${formatKeysForQuiz(opt.keys)}
+                         </button>`;
+            });
+
+            html += `
+                </div>
+                <button id="next-q-btn" onclick="nextQuestion()" style="display:none; margin-top: 30px; background: var(--primary); color: white; padding: 12px 30px; border:none; border-radius:8px; font-size:1.1rem; cursor:pointer; font-weight:bold;">Next Question ➔</button>
+            </div>`;
+
+            contentDisplay.innerHTML = html;
+        }
+
+        function checkAnswer(btnIndex, selectedKeysStr, correctKeysStr, btnElement) {
+            // Disable all buttons after click
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.style.pointerEvents = 'none');
+
+            if (selectedKeysStr === correctKeysStr) {
+                btnElement.classList.add('correct');
+                btnElement.innerHTML += ' ✅';
+                score += 10;
+                document.querySelector('.score-board').innerText = `🏆 Score: ${score}`;
+            } else {
+                btnElement.classList.add('wrong');
+                btnElement.innerHTML += ' ❌';
+                
+                // Highlight the correct one
+                allBtns.forEach(b => {
+                    if(b.innerHTML.includes(formatKeysForQuiz(JSON.parse(correctKeysStr)))) {
+                        b.classList.add('correct');
+                    }
+                });
+            }
+            
+            document.getElementById('next-q-btn').style.display = 'inline-block';
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
