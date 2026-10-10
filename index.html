@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Excellent Institute - Shortcut Master Guide</title>
     <!-- Modern Font Integration -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Premium Color Palette */
+            /* Premium Color Palette for Excellent Institute */
             --primary: #1e40af; 
             --primary-light: #eff6ff;
             --accent: #3b82f6;
             --success: #10b981;
-            --warning: #f59e0b;
             --danger: #ef4444;
             --surface: #ffffff;
             --background: #f1f5f9; 
@@ -38,21 +37,20 @@
             color: var(--text-main);
             height: 100vh;
             overflow: hidden;
-            letter-spacing: -0.01em;
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--background); }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; border: 2px solid var(--background); }
         ::-webkit-scrollbar-thumb:hover { background: #64748b; }
 
-        /* Header */
+        /* --- Header --- */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 24px;
+            padding: 15px 30px;
             background-color: var(--surface);
             border-bottom: 2px solid var(--border);
             z-index: 10;
@@ -67,7 +65,7 @@
 
         .toggle-btn {
             background: var(--primary-light);
-            border: 1px solid var(--border);
+            border: none;
             color: var(--primary);
             cursor: pointer;
             padding: 8px;
@@ -81,8 +79,9 @@
 
         .brand h2 { margin: 0; color: var(--primary); font-size: 1.5rem; font-weight: 800; cursor: pointer; letter-spacing: -0.5px;}
 
-        /* Action Buttons (Print & Game) */
-        .action-btns { display: flex; gap: 12px; }
+        /* --- Action Buttons --- */
+        .action-btns { display: flex; gap: 15px; }
+        
         .btn-game {
             background: linear-gradient(135deg, #8b5cf6, #3b82f6);
             color: white;
@@ -90,35 +89,37 @@
             padding: 10px 24px;
             border-radius: 8px;
             cursor: pointer;
+            font-size: 1.05rem;
             font-weight: 700;
-            font-size: 1rem;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: var(--shadow-md);
         }
         .btn-game:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
         
         .btn-print {
-            background-color: var(--text-main);
-            color: white;
-            border: none;
+            background-color: var(--surface);
+            color: var(--text-main);
+            border: 2px solid var(--border);
             padding: 10px 24px;
             border-radius: 8px;
             cursor: pointer;
+            font-size: 1.05rem;
             font-weight: 700;
-            font-size: 1rem;
             transition: all 0.2s ease;
-            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .btn-print:hover { background-color: #334155; transform: translateY(-2px); }
+        .btn-print:hover { background-color: var(--background); border-color: var(--text-muted); }
 
-        /* Main Layout & Sidebar */
+        /* --- Main Layout & Sidebar --- */
         .main-container { display: flex; flex: 1; overflow: hidden; }
 
         .sidebar {
-            width: 300px;
+            width: 320px;
             background-color: var(--surface);
-            border-right: 1px solid var(--border);
-            padding: 24px 16px;
+            border-right: 2px solid var(--border);
+            padding: 24px 20px;
             overflow-y: auto;
             flex-shrink: 0;
             display: flex;
@@ -127,32 +128,31 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .sidebar.collapsed { width: 0; padding: 24px 0; opacity: 0; border: none; }
+        .sidebar.collapsed { width: 0; padding: 24px 0; border: none; opacity: 0; overflow: hidden; }
         
         .nav-label {
-            font-size: 0.8rem; text-transform: uppercase; font-weight: 800;
+            font-size: 0.85rem; text-transform: uppercase; font-weight: 800;
             color: var(--text-muted); margin-bottom: 12px; padding-left: 12px; letter-spacing: 0.5px;
         }
 
         .nav-btn {
-            display: flex; align-items: center; width: 100%; padding: 14px 16px;
-            border: 1px solid transparent; background: none; text-align: left; font-size: 1rem;
+            display: flex; align-items: center; width: 100%; padding: 14px 18px;
+            border: none; background: none; text-align: left; font-size: 1.05rem;
             font-weight: 600; color: var(--text-muted); cursor: pointer;
             border-radius: var(--radius); transition: all 0.2s ease; white-space: nowrap;
         }
-        .nav-btn:hover { background-color: var(--background); color: var(--text-main); border-color: var(--border); }
-        .nav-btn.active { background-color: var(--primary-light); color: var(--primary); border-color: #bfdbfe; font-weight: 700;}
+        .nav-btn:hover { background-color: var(--background); color: var(--text-main); transform: translateX(4px); }
+        .nav-btn.active { background-color: var(--primary-light); color: var(--primary); border-left: 4px solid var(--primary); }
 
-        /* Content Area */
+        /* --- Content Area --- */
         .content-area {
-            flex: 1; padding: 40px 60px; overflow-y: auto; scroll-behavior: smooth;
+            flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth;
         }
 
         .content-wrapper {
-            max-width: 1100px; margin: 0 auto; background: var(--surface);
+            max-width: 950px; margin: 0 auto; background: var(--surface);
             padding: 50px 60px; border-radius: 16px;
             box-shadow: var(--shadow-md); animation: fadeIn 0.4s ease forwards;
-            border: 1px solid var(--border);
         }
 
         @keyframes fadeIn {
@@ -160,128 +160,132 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Typography */
-        h1 { color: var(--text-main); font-size: 2.5rem; font-weight: 900; border-bottom: 3px solid var(--border); padding-bottom: 15px; margin-top: 0;}
-        h3 { color: var(--primary); font-size: 1.5rem; margin-top: 45px; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
-        p { line-height: 1.8; font-size: 1.15rem; color: var(--text-muted); font-weight: 500;}
+        /* --- Typography --- */
+        h1 { color: var(--text-main); font-size: 2.5rem; font-weight: 900; border-bottom: 3px solid var(--primary-light); padding-bottom: 15px; margin-top: 0;}
+        h3 { color: var(--primary); font-size: 1.6rem; font-weight: 700; margin-top: 45px; border-bottom: 2px solid var(--border); padding-bottom: 12px; }
+        p { line-height: 1.8; font-size: 1.15rem; color: var(--text-muted); margin-bottom: 25px; }
 
-        /* Dashboard Grid */
+        /* --- Dashboard Grid --- */
         .hero { text-align: center; margin-bottom: 50px; }
-        .hero h1 { font-size: 3rem; border: none; color: var(--primary); margin-bottom: 15px;}
-        .hero p { color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 0 auto; line-height: 1.6;}
+        .hero h1 { font-size: 3rem; border: none; color: var(--primary); padding: 0;}
+        .hero p { color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 15px auto 0 auto;}
         
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin-top: 30px;}
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
         .module-card {
             background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius);
-            padding: 24px; cursor: pointer; transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+            padding: 30px 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+            text-align: center;
         }
-        .module-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--accent); background: var(--primary-light);}
-        .card-icon { font-size: 2.5rem; margin-bottom: 15px; background: white; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);}
-        .module-card h3 { margin: 0 0 10px 0; color: var(--text-main); font-size: 1.3rem; border: none; padding: 0;}
+        .module-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
+        .card-icon { font-size: 2.5rem; margin-bottom: 15px; background: var(--primary-light); width: 65px; height: 65px; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; }
+        .module-card h3 { margin: 0 0 10px 0; color: var(--text-main); font-size: 1.35rem; border: none; padding: 0;}
+        .module-card span { font-size: 1rem; color: var(--text-muted); font-weight: 600; background: var(--background); padding: 5px 12px; border-radius: 20px;}
         
-        /* ⌨️ Beautiful Mechanical Keyboard Key Styling ⌨️ */
-        .shortcut-list { margin-top: 25px; display: flex; flex-direction: column; gap: 16px; }
+        /* --- ⌨️ Mechanical Keyboard Key Styling ⌨️ --- */
+        .shortcut-list { margin-top: 25px; display: flex; flex-direction: column; gap: 18px; }
         .shortcut-item {
-            display: flex; align-items: center; padding: 18px 24px;
+            display: flex; align-items: center; padding: 18px 25px;
             background-color: var(--background); border-radius: 12px;
-            border-left: 6px solid var(--accent); transition: transform 0.2s, background-color 0.2s;
+            border-left: 5px solid var(--accent); transition: transform 0.2s;
         }
-        .shortcut-item:hover { transform: translateX(8px); background-color: #e0e7ff; border-left-color: #4338ca;}
+        .shortcut-item:hover { transform: translateX(6px); background-color: var(--primary-light); }
         
         .keys { flex: 0 0 45%; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
-        .action { flex: 1; font-size: 1.15rem; color: var(--text-main); font-weight: 600; line-height: 1.5;}
+        .action { flex: 1; font-size: 1.15rem; color: var(--text-main); font-weight: 600; line-height: 1.6;}
         
         .kbd-style {
             display: inline-block;
             background-color: #ffffff;
             color: #1e293b;
-            border: 1px solid #cbd5e1;
-            border-bottom: 4px solid #94a3b8;
+            border: 1px solid #94a3b8;
+            border-bottom: 4px solid #64748b;
             border-radius: 8px;
-            padding: 8px 16px;
-            font-family: 'Fira Code', 'Courier New', Courier, monospace;
-            font-weight: 700;
-            font-size: 1rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+            padding: 6px 14px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 900;
+            font-size: 1.1rem;
+            box-shadow: 0 3px 0 rgba(0,0,0,0.1);
             letter-spacing: 0.5px;
         }
 
-        /* Plus sign between keys */
-        .key-plus { font-weight: 900; color: #94a3b8; font-size: 1.4rem; }
+        .key-plus { font-weight: 900; color: var(--text-muted); font-size: 1.4rem; padding: 0 4px; }
 
-        /* Game UI */
-        .quiz-container { text-align: center; padding: 20px; }
-        .score-board { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 12px 25px; border-radius: 30px; font-weight: 900; font-size: 1.4rem; margin-bottom: 30px; border: 2px solid #bfdbfe;}
-        .question-box { font-size: 1.6rem; color: var(--text-main); margin-bottom: 40px; font-weight: 700; padding: 30px; background: var(--background); border-radius: var(--radius); border: 3px dashed var(--accent); line-height: 1.5;}
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
+        /* --- Game UI (Quiz) --- */
+        .quiz-container { text-align: center; padding: 30px; }
+        .score-board { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 12px 30px; border-radius: 30px; font-weight: 900; font-size: 1.5rem; margin-bottom: 30px; border: 2px solid var(--accent);}
+        .question-box { font-size: 1.8rem; color: var(--text-main); margin-bottom: 40px; font-weight: 700; padding: 30px; background: var(--background); border-radius: var(--radius); border: 3px dashed var(--border);}
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 700px; margin: 0 auto; }
         .option-btn {
-            background: var(--surface); border: 2px solid var(--border); padding: 20px; border-radius: var(--radius);
+            background: var(--surface); border: 3px solid var(--border); padding: 20px; border-radius: var(--radius);
             font-size: 1.2rem; cursor: pointer; transition: all 0.2s;
-            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px; box-shadow: var(--shadow-sm);
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px;
         }
-        .option-btn:hover { border-color: var(--accent); background: var(--primary-light); transform: translateY(-3px); box-shadow: var(--shadow-md);}
-        .option-btn.correct { background: #d1fae5; border-color: var(--success); color: #065f46; box-shadow: 0 0 15px rgba(16, 185, 129, 0.3); }
-        .option-btn.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; opacity: 0.7;}
+        .option-btn:hover { border-color: var(--accent); background: var(--primary-light); transform: translateY(-3px); }
+        .option-btn.correct { background: #d1fae5; border-color: var(--success); color: #065f46; }
+        .option-btn.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; }
 
-        /* --- THE SECRET PRINT ENGINE CONTAINER --- */
-        #print-container { display: none; }
-
-        /* Responsive */
+        /* --- Responsive Design --- */
         @media (max-width: 900px) {
             .main-container { flex-direction: column; }
-            .sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 12px; }
+            .sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 15px; border-right: none; border-bottom: 2px solid var(--border);}
             .sidebar.collapsed { display: none; }
             .nav-label { display: none; }
-            .nav-btn { padding: 10px 20px; border-radius: 30px; border: 2px solid var(--border); }
+            .nav-btn { padding: 10px 20px; border-radius: 20px; border: 2px solid var(--border); margin-right: 10px;}
             .content-area { padding: 20px 15px; }
-            .content-wrapper { padding: 30px 25px; }
+            .content-wrapper { padding: 30px 20px; }
             .shortcut-item { flex-direction: column; align-items: flex-start; gap: 15px; }
             .keys { width: 100%; }
             .options-grid { grid-template-columns: 1fr; }
-            .header { flex-direction: column; gap: 15px; }
+            .action-btns span { display: none; } /* Hide text on buttons for small screens */
         }
 
-        /* --- PRINT CSS ENGINE (Solves the cutoff and margin issues) --- */
+        /* ========================================= */
+        /* 🖨️ SMART PDF & PRINT FORMATTING 🖨️        */
+        /* ========================================= */
         @media print {
-            /* Hide the web app entirely */
-            body { background: white; height: auto; overflow: visible; }
-            .header, .sidebar, .content-area, .btn-game, .btn-print, #main-sidebar, .main-container { display: none !important; }
+            /* Force exact colors so the keys look like real keys in the PDF */
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             
-            /* Show the hidden Print Container */
-            #print-container { display: block !important; width: 100%; color: black; }
+            /* Set perfect A4 paper margins */
+            @page { size: A4 portrait; margin: 20mm; }
+
+            /* Hide UI elements not meant for the printed book */
+            .header, .sidebar, .hero, .btn-game, .btn-print { display: none !important; }
             
-            /* Perfect A4 Margins */
-            @page { size: A4; margin: 20mm 15mm; }
-            
-            /* Print Typography & Styling */
-            .print-hero { text-align: center; margin-bottom: 40px; border-bottom: 4px solid #1e40af; padding-bottom: 20px;}
-            .print-hero h1 { font-size: 28pt; color: #1e40af; border: none; margin: 0; padding: 0;}
-            .print-hero p { font-size: 14pt; color: #475569; font-weight: bold;}
-            
-            .print-chapter { page-break-before: always; }
-            .print-chapter:first-of-type { page-break-before: avoid; }
-            .print-chapter h1 { font-size: 22pt; color: #1e40af; border-bottom: 2px solid #cbd5e1; padding-bottom: 8px; margin-top: 0;}
-            
-            .print-topic h3 { font-size: 16pt; color: #3b82f6; margin-top: 25px; border-bottom: none; padding:0; margin-bottom: 5px;}
-            .print-topic p { font-size: 12pt; color: #334155; margin-top: 0; margin-bottom: 15px;}
-            
-            /* Print Shortcuts Table Style */
-            .print-shortcut-item { 
-                display: flex; align-items: center; padding: 10px; margin-bottom: 8px;
-                border: 1px solid #e2e8f0; border-radius: 8px; page-break-inside: avoid;
-                background-color: #f8fafc !important; -webkit-print-color-adjust: exact;
+            /* Reset body and content area constraints */
+            body, .main-container, .content-area {
+                display: block; width: 100%; height: auto; margin: 0; padding: 0; overflow: visible; background: white;
             }
-            .print-keys { flex: 0 0 35%; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;}
-            .print-action { flex: 1; font-size: 11pt; font-weight: bold; color: black; padding-left: 15px;}
-            
-            .print-kbd {
-                display: inline-block; background-color: white !important; color: black !important;
-                border: 1px solid #94a3b8 !important; border-bottom: 3px solid #64748b !important;
-                border-radius: 6px; padding: 4px 10px; font-family: 'Courier New', monospace;
-                font-weight: bold; font-size: 10pt; -webkit-print-color-adjust: exact;
+
+            /* Make the wrapper take full width, remove shadows/borders */
+            .content-wrapper { 
+                max-width: 100%; width: 100%; padding: 0; margin: 0; 
+                box-shadow: none; border: none; background: white;
             }
-            .print-plus { font-weight: bold; color: #94a3b8; }
+
+            /* Formatting text for print */
+            h1 { font-size: 24pt; color: #000; border-bottom: 2px solid #000; padding-bottom: 10px; }
+            h3 { font-size: 16pt; color: #000; margin-top: 25pt; border-bottom: 1px solid #ccc; }
+            p { font-size: 12pt; color: #333; margin-bottom: 15pt; }
+
+            /* Prevent shortcuts from breaking across two pages */
+            .shortcut-item { 
+                page-break-inside: avoid; 
+                break-inside: avoid; 
+                border: 1px solid #e2e8f0; 
+                margin-bottom: 10pt;
+                background-color: #f8fafc !important; 
+            }
+            
+            .action { font-size: 12pt; color: #000; }
+            
+            /* Ensure the keyboard buttons retain their styling in PDF */
+            .kbd-style {
+                background-color: #ffffff !important;
+                border: 1px solid #64748b !important;
+                border-bottom: 3px solid #475569 !important;
+                color: #000 !important;
+            }
         }
     </style>
 </head>
@@ -290,38 +294,36 @@
     <!-- Header -->
     <div class="header">
         <div class="brand">
-            <button class="toggle-btn" onclick="toggleSidebar()" title="Toggle Menu">
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <button class="toggle-btn" onclick="toggleSidebar()" title="Hide/Show Menu">
+                <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
             <h2 onclick="loadDashboard()">Excellent Institute</h2>
         </div>
         <div class="action-btns">
-            <button class="btn-game" onclick="startQuiz()">🎮 Play Quiz</button>
-            <button class="btn-print" onclick="printAllNotes()">🖨️ Print Full Book</button>
+            <button class="btn-game" onclick="startQuiz()">🎮 <span>Play Quiz</span></button>
+            <button class="btn-print" onclick="window.print()">🖨️ <span>Print Chapter</span></button>
         </div>
     </div>
 
     <!-- Main Workspace -->
     <div class="main-container">
+        
         <!-- Sidebar -->
         <div class="sidebar" id="main-sidebar">
-            <div class="nav-label">Course Contents</div>
+            <div class="nav-label">Course Modules</div>
             <button class="nav-btn active" onclick="loadDashboard()" id="home-btn">🏠 Home Dashboard</button>
             <div id="nav-container" style="display: flex; flex-direction: column; gap: 8px;">
-                <!-- JS Inject Chapters -->
+                <!-- JS Inject Chapters here -->
             </div>
         </div>
 
         <!-- Content Area -->
         <div class="content-area" id="content-display">
-            <!-- JS Inject Content -->
+            <!-- JS Inject Content here -->
         </div>
     </div>
-
-    <!-- Hidden Container purely for the Print Engine -->
-    <div id="print-container"></div>
 
     <!-- Load Data File -->
     <script src="shortcuts-data.js"></script>
@@ -333,22 +335,22 @@
         
         let allShortcutsList = []; 
 
-        // 1. Initialize
+        // 1. Initialize Application
         function initApp() {
             if (typeof shortcutBookData === 'undefined') {
-                contentDisplay.innerHTML = `<h2 style="color:red; text-align:center;">Error: shortcuts-data.js missing. Please ensure the file is linked.</h2>`;
+                contentDisplay.innerHTML = `<div class="content-wrapper"><h2 style="color:var(--danger); text-align:center;">Error: Please ensure 'shortcuts-data.js' is in the same folder.</h2></div>`;
                 return;
             }
             
+            // Build the Sidebar
             shortcutBookData.forEach((chapter, index) => {
-                // Generate Sidebar Nav
                 const btn = document.createElement('button');
                 btn.className = 'nav-btn note-nav-btn';
                 btn.innerHTML = `📘 ${chapter.title.split(':')[0]}`; 
                 btn.onclick = () => loadContent(index, btn);
                 navContainer.appendChild(btn);
 
-                // Collect all shortcuts for the quiz
+                // Pool all shortcuts for the Quiz game
                 chapter.topics.forEach(topic => {
                     if(topic.shortcuts) {
                         allShortcutsList = allShortcutsList.concat(topic.shortcuts);
@@ -372,7 +374,7 @@
             <div class="content-wrapper">
                 <div class="hero">
                     <h1>Shortcut Master Guide</h1>
-                    <p>Designed perfectly for Excellent Institute students to build lightning-fast computer skills. Click a module below to start learning, or play the quiz!</p>
+                    <p>Designed for students from 8th class and above. Master your keyboard, speed up your workflow, and become a computer expert. Select a module below to begin!</p>
                 </div>
                 <div class="dashboard-grid">`;
             
@@ -381,23 +383,25 @@
                     <div class="module-card" onclick="document.querySelectorAll('.note-nav-btn')[${index}].click()">
                         <div class="card-icon">⌨️</div>
                         <h3>${chapter.title}</h3>
-                        <span style="font-weight:bold; color:var(--accent);">${chapter.topics.length} Modules inside</span>
+                        <span>${chapter.topics.length} Topics</span>
                     </div>`;
             });
 
             html += `</div></div>`;
             contentDisplay.innerHTML = html;
+            contentDisplay.scrollTop = 0;
         }
 
-        // 3. Load Chapter Content
+        // 3. Load Chapter Content (This is what gets printed)
         function loadContent(index, clickedBtn) {
+            // Update Active State in Sidebar
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             if(clickedBtn) clickedBtn.classList.add('active');
 
             const chapter = shortcutBookData[index];
 
             let html = `
-            <div class="content-wrapper">
+            <div class="content-wrapper" id="printable-chapter">
                 <h1>${chapter.title}</h1>`;
             
             chapter.topics.forEach(topic => {
@@ -406,6 +410,7 @@
                 if(topic.shortcuts) {
                     html += `<div class="shortcut-list">`;
                     topic.shortcuts.forEach(sc => {
+                        // Generate the mechanical keys HTML
                         let keysHtml = sc.keys.map(k => `<kbd class="kbd-style">${k}</kbd>`).join('<span class="key-plus"> + </span>');
                         
                         html += `
@@ -419,96 +424,54 @@
             });
             html += `</div>`;
             
+            // Inject into DOM
             contentDisplay.innerHTML = html;
             contentDisplay.scrollTop = 0;
             
+            // Auto-hide sidebar on mobile after clicking
             if(window.innerWidth <= 900) sidebar.classList.add('collapsed');
         }
 
         // ==========================================
-        // 🖨️ THE CUSTOM PRINT ENGINE
-        // ==========================================
-        function printAllNotes() {
-            const printContainer = document.getElementById('print-container');
-            
-            // Build the cover page & header
-            let printHtml = `
-            <div class="print-hero">
-                <h1>Excellent Institute</h1>
-                <h2>The Ultimate Shortcut Keys Guide</h2>
-                <p>Complete Syllabus • Basic to Advanced Level</p>
-            </div>`;
-            
-            // Loop through all data and stitch it into a continuous document
-            shortcutBookData.forEach(chapter => {
-                printHtml += `
-                <div class="print-chapter">
-                    <h1>${chapter.title}</h1>`;
-                
-                chapter.topics.forEach(topic => {
-                    printHtml += `
-                    <div class="print-topic">
-                        <h3>${topic.heading}</h3>
-                        <p>${topic.text}</p>`;
-                    
-                    if(topic.shortcuts) {
-                        topic.shortcuts.forEach(sc => {
-                            let keysHtml = sc.keys.map(k => `<kbd class="print-kbd">${k}</kbd>`).join('<span class="print-plus"> + </span>');
-                            printHtml += `
-                            <div class="print-shortcut-item">
-                                <div class="print-keys">${keysHtml}</div>
-                                <div class="print-action">${sc.action}</div>
-                            </div>`;
-                        });
-                    }
-                    printHtml += `</div>`; // Close topic
-                });
-                printHtml += `</div>`; // Close chapter
-            });
-
-            // Inject the massive HTML string into the hidden container
-            printContainer.innerHTML = printHtml;
-            
-            // Trigger the browser's print dialog (CSS @media print handles the rest)
-            window.print();
-        }
-
-        // ==========================================
-        // 🎮 FUN ACTIVITY: SHORTCUT MASTER QUIZ 
+        // 🎮 FUN ACTIVITY: SHORTCUT MASTER QUIZ 🎮
         // ==========================================
         let score = 0;
         let currentQuestionObj = null;
 
         function formatKeysForQuiz(keyArray) {
-            return keyArray.map(k => `<kbd class="kbd-style" style="font-size:0.9rem; padding: 4px 10px;">${k}</kbd>`).join(' + ');
+            return keyArray.map(k => `<kbd class="kbd-style" style="font-size:1rem; padding: 4px 10px;">${k}</kbd>`).join(' + ');
         }
 
         function startQuiz() {
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             score = 0;
             nextQuestion();
+            if(window.innerWidth <= 900) sidebar.classList.add('collapsed');
         }
 
         function nextQuestion() {
+            // Pick a random shortcut to test
             const correctIndex = Math.floor(Math.random() * allShortcutsList.length);
             currentQuestionObj = allShortcutsList[correctIndex];
 
+            // Generate 3 random wrong answers
             let options = [currentQuestionObj];
             while (options.length < 4) {
                 let randomWrong = allShortcutsList[Math.floor(Math.random() * allShortcutsList.length)];
+                // Prevent duplicate options
                 if (!options.some(opt => JSON.stringify(opt.keys) === JSON.stringify(randomWrong.keys))) {
                     options.push(randomWrong);
                 }
             }
 
-            // Shuffle
+            // Shuffle the options
             options.sort(() => Math.random() - 0.5);
 
             let html = `
             <div class="content-wrapper quiz-container">
                 <div class="score-board">🏆 Score: ${score}</div>
-                <h2 style="font-size: 2rem; color: var(--primary);">Shortcut Master Challenge!</h2>
-                <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 1.2rem;">Read the action and select the correct keyboard shortcut.</p>
+                <h2 style="font-size:2.2rem; color:var(--primary); margin-top:0;">Shortcut Challenge!</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px; font-size:1.2rem;">Read the action below and select the correct keyboard shortcut.</p>
                 
                 <div class="question-box">
                     "${currentQuestionObj.action}"
@@ -524,31 +487,31 @@
 
             html += `
                 </div>
-                <button id="next-q-btn" onclick="nextQuestion()" style="display:none; margin-top: 40px; background: var(--text-main); color: white; padding: 15px 40px; border:none; border-radius:12px; font-size:1.2rem; cursor:pointer; font-weight:bold; box-shadow: var(--shadow-md);">Next Question ➔</button>
+                <button id="next-q-btn" onclick="nextQuestion()" style="display:none; margin-top: 40px; background: var(--primary); color: white; padding: 15px 40px; border:none; border-radius:12px; font-size:1.2rem; cursor:pointer; font-weight:800; box-shadow: var(--shadow-md);">Next Question ➔</button>
             </div>`;
 
             contentDisplay.innerHTML = html;
         }
 
         function checkAnswer(selectedKeysStr, correctKeysStr, btnElement) {
+            // Disable all buttons after clicking
             const allBtns = document.querySelectorAll('.option-btn');
             allBtns.forEach(b => b.style.pointerEvents = 'none');
 
             if (selectedKeysStr === correctKeysStr) {
                 btnElement.classList.add('correct');
-                btnElement.innerHTML += ' ✅';
+                btnElement.innerHTML += ' <span style="font-size:1.5rem;">✅</span>';
                 score += 10;
                 document.querySelector('.score-board').innerText = `🏆 Score: ${score}`;
             } else {
                 btnElement.classList.add('wrong');
-                btnElement.innerHTML += ' ❌';
+                btnElement.innerHTML += ' <span style="font-size:1.5rem;">❌</span>';
                 
-                // Highlight correct answer
+                // Show the correct answer
                 allBtns.forEach(b => {
-                    // Check if this button contains the exact correct keys format
-                    const targetHTML = formatKeysForQuiz(JSON.parse(correctKeysStr));
-                    if(b.innerHTML.includes(targetHTML)) {
+                    if(b.innerHTML.includes(formatKeysForQuiz(JSON.parse(correctKeysStr)))) {
                         b.classList.add('correct');
+                        b.innerHTML += ' <span style="font-size:1.5rem;">✅</span>';
                     }
                 });
             }
