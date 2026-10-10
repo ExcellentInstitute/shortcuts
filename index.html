@@ -130,7 +130,7 @@
 
         .sidebar {
             width: 320px;
-            background-color: var(--surface);
+            background-color: rgba(255, 255, 255, 0.95);
             border-right: 2px solid var(--border);
             padding: 24px 20px;
             overflow-y: auto;
@@ -163,11 +163,14 @@
             flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth; position: relative; z-index: 15;
         }
 
+        /* 💦 Semi-transparent Content Wrapper so watermark shows perfectly 💦 */
         .content-wrapper {
-            max-width: 950px; margin: 0 auto; background: rgba(255, 255, 255, 0.97);
+            max-width: 950px; margin: 0 auto; 
+            background: rgba(255, 255, 255, 0.88); /* See-through background */
             padding: 50px 60px; border-radius: 16px;
             box-shadow: var(--shadow-md); animation: fadeIn 0.4s ease forwards;
-            position: relative; border: 1px solid var(--border);
+            position: relative; border: 1px solid rgba(203, 213, 225, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         @keyframes fadeIn {
@@ -175,11 +178,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- Universal Watermark (Restored) --- */
+        /* --- Universal Watermark (Visible through components) --- */
         .watermark-bg {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 45vw; max-width: 450px; opacity: 0.04; pointer-events: none; 
-            z-index: 1; border-radius: 50%; object-fit: cover;
+            width: 45vw; max-width: 450px; 
+            opacity: 0.08; /* Perfect visibility without hurting reading */
+            pointer-events: none; 
+            z-index: 9999; /* Forces the watermark to overlay everything seamlessly */
+            border-radius: 50%; object-fit: cover;
         }
 
         /* --- Typography --- */
@@ -194,25 +200,27 @@
         
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
         .module-card {
-            background: var(--surface); border: 2px solid var(--border); border-radius: var(--radius);
+            background: rgba(255, 255, 255, 0.9); border: 2px solid var(--border); border-radius: var(--radius);
             padding: 30px 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: var(--shadow-sm);
-            text-align: center;
+            text-align: center; backdrop-filter: blur(2px);
         }
         .module-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
         .card-icon { font-size: 2.8rem; margin-bottom: 15px; background: var(--primary-light); width: 75px; height: 75px; display: inline-flex; align-items: center; justify-content: center; border-radius: 20px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);}
         .module-card h3 { margin: 0 0 10px 0; color: var(--text-main); font-size: 1.4rem; border: none; padding: 0;}
-        .module-card span { font-size: 1rem; color: var(--text-muted); font-weight: 700; background: var(--background); padding: 6px 14px; border-radius: 20px;}
+        .module-card span { font-size: 1rem; color: var(--text-muted); font-weight: 700; background: rgba(241, 245, 249, 0.8); padding: 6px 14px; border-radius: 20px;}
         
         /* --- ⌨️ Advanced Mechanical Keyboard Key Styling ⌨️ --- */
         .shortcut-list { margin-top: 25px; display: flex; flex-direction: column; gap: 18px; }
         .shortcut-item {
             display: flex; align-items: center; padding: 20px 25px;
-            background: linear-gradient(to right, #f8fafc, #ffffff); border-radius: 12px;
-            border: 1px solid var(--border);
+            background: rgba(248, 250, 252, 0.6); /* Semi-transparent so Watermark shows */
+            border-radius: 12px;
+            border: 1px solid rgba(203, 213, 225, 0.6);
             border-left: 6px solid var(--accent); transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            backdrop-filter: blur(2px);
         }
-        .shortcut-item:hover { transform: translateX(6px); box-shadow: var(--shadow-md); border-color: #93c5fd; }
+        .shortcut-item:hover { transform: translateX(6px); box-shadow: var(--shadow-md); border-color: #93c5fd; background: rgba(239, 246, 255, 0.8);}
         
         .keys { flex: 0 0 45%; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
         .action { flex: 1; font-size: 1.2rem; color: var(--text-main); font-weight: 600; line-height: 1.6;}
@@ -220,7 +228,7 @@
         /* 3D Key Design */
         .kbd-style {
             display: inline-block;
-            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(241,245,249,0.95) 100%);
             color: #0f172a;
             border: 1px solid #cbd5e1;
             border-bottom: 5px solid #94a3b8;
@@ -240,10 +248,10 @@
         /* --- Game UI (Quiz) --- */
         .quiz-container { text-align: center; padding: 40px 30px; }
         .score-board { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 12px 35px; border-radius: 30px; font-weight: 900; font-size: 1.6rem; margin-bottom: 30px; border: 2px solid var(--accent); box-shadow: var(--shadow-md);}
-        .question-box { font-size: 1.9rem; color: var(--text-main); margin-bottom: 40px; font-weight: 800; padding: 40px; background: var(--surface); border-radius: 20px; border: 3px dashed var(--accent); box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);}
+        .question-box { font-size: 1.9rem; color: var(--text-main); margin-bottom: 40px; font-weight: 800; padding: 40px; background: rgba(255, 255, 255, 0.9); border-radius: 20px; border: 3px dashed var(--accent); box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);}
         .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
         .option-btn {
-            background: var(--surface); border: 3px solid var(--border); padding: 20px; border-radius: 16px;
+            background: rgba(255, 255, 255, 0.95); border: 3px solid var(--border); padding: 20px; border-radius: 16px;
             font-size: 1.2rem; cursor: pointer; transition: all 0.2s;
             display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.02);
@@ -269,7 +277,7 @@
         }
 
         /* ========================================================== */
-        /* 🖨️ SMART PDF & PRINT FORMATTING (FIXED) 🖨️               */
+        /* 🖨️ SMART PDF & PRINT FORMATTING (WATERMARK FIXED) 🖨️      */
         /* ========================================================== */
         @media print {
             /* 1. Force background graphics, borders, and gradients to print */
@@ -300,7 +308,7 @@
                 display: none !important; 
             }
 
-            /* 5. Maximize the actual content wrapper to fill the paper */
+            /* 5. Maximize the actual content wrapper to fill the paper & make it transparent so watermark shows */
             .content-wrapper { 
                 max-width: 100% !important; 
                 width: 100% !important; 
@@ -308,7 +316,7 @@
                 margin: 0 !important; 
                 box-shadow: none !important; 
                 border: none !important; 
-                background: transparent !important;
+                background: rgba(255, 255, 255, 0.8) !important;
             }
 
             /* 6. Typography adjustments for physical paper */
@@ -317,7 +325,7 @@
             h3 { font-size: 16pt !important; color: #000 !important; margin-top: 25pt !important; border-bottom: 1px solid #ccc !important; }
             p { font-size: 12pt !important; color: #333 !important; margin-bottom: 15pt !important; }
 
-            /* 7. Ensure Shortcut layout does not break across pages */
+            /* 7. Ensure Shortcut layout does not break across pages and maintains see-through background */
             .shortcut-list { gap: 10px !important; margin-top: 15px !important;}
             .shortcut-item { 
                 page-break-inside: avoid !important; 
@@ -325,7 +333,7 @@
                 border: 1px solid #cbd5e1 !important; 
                 border-left: 6px solid #3b82f6 !important;
                 margin-bottom: 10pt !important;
-                background-color: #f8fafc !important; 
+                background-color: rgba(248, 250, 252, 0.6) !important; 
                 padding: 12px 15px !important;
             }
             
@@ -342,17 +350,17 @@
                 padding: 4px 10px !important;
             }
 
-            /* 9. Watermark perfectly centered on every printed page */
+            /* 9. Watermark perfectly centered and OVERLAYING everything so it never gets blocked */
             .watermark-bg {
                 display: block !important;
-                opacity: 0.06 !important;
+                opacity: 0.1 !important;
                 position: fixed !important;
                 top: 50% !important;
                 left: 50% !important;
                 transform: translate(-50%, -50%) !important;
                 width: 60vw !important;
                 max-width: 500px !important;
-                z-index: -100 !important;
+                z-index: 9999 !important; /* Guaranteed to overlay */
             }
         }
     </style>
@@ -360,8 +368,8 @@
 <body>
 
     <!-- Active Watermark -->
-    <!-- Make sure to replace YOUR_GITHUB_LOGO_URL.png with your actual logo file name (e.g., images/logo.png) -->
-    <img src="institute_logo.jpeg" alt="Watermark" class="watermark-bg" id="watermarkLogo" onerror="this.style.display='none'">
+    <!-- Put your actual logo file name below (e.g., images/logo.png) -->
+    <img src="YOUR_GITHUB_LOGO_URL.png" alt="Watermark" class="watermark-bg" id="watermarkLogo" onerror="this.style.display='none'">
 
     <!-- Header -->
     <div class="header">
@@ -371,13 +379,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
-            <!-- Excellent Institute Logo Restored -->
-            <img src="institute_logo.jpeg" alt="Excellent Institute Logo" class="logo" id="mainLogo" onclick="loadDashboard()" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%231e40af\'><circle cx=\'50\' cy=\'50\' r=\'50\'/><text x=\'50\' y=\'65\' font-family=\'Arial\' font-size=\'40\' font-weight=\'bold\' fill=\'white\' text-anchor=\'middle\'>EI</text></svg>'">
+            <!-- Excellent Institute Logo -->
+            <!-- Put your actual logo file name below (e.g., images/logo.png) -->
+            <img src="YOUR_GITHUB_LOGO_URL.png" alt="Excellent Institute Logo" class="logo" id="mainLogo" onclick="loadDashboard()" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%231e40af\'><circle cx=\'50\' cy=\'50\' r=\'50\'/><text x=\'50\' y=\'65\' font-family=\'Arial\' font-size=\'40\' font-weight=\'bold\' fill=\'white\' text-anchor=\'middle\'>EI</text></svg>'">
             <h2 onclick="loadDashboard()">Excellent Institute</h2>
         </div>
         <div class="action-btns">
             <button class="btn-game" onclick="startQuiz()">🎮 <span>Play Quiz</span></button>
-            <!-- Triggers Browser Print for the CURRENT displayed chapter -->
             <button class="btn-print" onclick="window.print()">🖨️ <span>Print Chapter</span></button>
         </div>
     </div>
