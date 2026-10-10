@@ -28,15 +28,14 @@
         
         * { box-sizing: border-box; }
 
-        body {
+        body, html {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            display: flex;
-            flex-direction: column;
+            padding: 0;
             background-color: var(--background);
             color: var(--text-main);
             height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Prevents double scrollbars in web view */
         }
 
         /* Custom Scrollbar */
@@ -50,10 +49,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
-            background-color: var(--surface);
+            padding: 12px 24px;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 2px solid var(--border);
-            z-index: 10;
+            z-index: 50;
+            position: relative;
             box-shadow: var(--shadow-sm);
         }
 
@@ -77,7 +78,19 @@
         }
         .toggle-btn:hover { background-color: var(--primary); color: white; }
 
-        .brand h2 { margin: 0; color: var(--primary); font-size: 1.5rem; font-weight: 800; cursor: pointer; letter-spacing: -0.5px;}
+        /* Circular Logo (Restored) */
+        .brand img.logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            background-color: white;
+        }
+
+        .brand h2 { margin: 0; color: var(--primary); font-size: 1.4rem; font-weight: 800; cursor: pointer; letter-spacing: -0.5px;}
 
         /* --- Action Buttons --- */
         .action-btns { display: flex; gap: 15px; }
@@ -113,7 +126,7 @@
         .btn-print:hover { background-color: var(--background); border-color: var(--text-muted); }
 
         /* --- Main Layout & Sidebar --- */
-        .main-container { display: flex; flex: 1; overflow: hidden; }
+        .main-container { display: flex; height: calc(100vh - 75px); overflow: hidden; position: relative; z-index: 10;}
 
         .sidebar {
             width: 320px;
@@ -126,6 +139,7 @@
             flex-direction: column;
             gap: 8px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
         }
         
         .sidebar.collapsed { width: 0; padding: 24px 0; border: none; opacity: 0; overflow: hidden; }
@@ -146,13 +160,14 @@
 
         /* --- Content Area --- */
         .content-area {
-            flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth;
+            flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth; position: relative; z-index: 15;
         }
 
         .content-wrapper {
-            max-width: 950px; margin: 0 auto; background: var(--surface);
+            max-width: 950px; margin: 0 auto; background: rgba(255, 255, 255, 0.97);
             padding: 50px 60px; border-radius: 16px;
             box-shadow: var(--shadow-md); animation: fadeIn 0.4s ease forwards;
+            position: relative; border: 1px solid var(--border);
         }
 
         @keyframes fadeIn {
@@ -160,15 +175,22 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- Universal Watermark (Restored) --- */
+        .watermark-bg {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 45vw; max-width: 450px; opacity: 0.04; pointer-events: none; 
+            z-index: 1; border-radius: 50%; object-fit: cover;
+        }
+
         /* --- Typography --- */
-        h1 { color: var(--text-main); font-size: 2.5rem; font-weight: 900; border-bottom: 3px solid var(--primary-light); padding-bottom: 15px; margin-top: 0;}
-        h3 { color: var(--primary); font-size: 1.6rem; font-weight: 700; margin-top: 45px; border-bottom: 2px solid var(--border); padding-bottom: 12px; }
+        h1 { color: var(--text-main); font-size: 2.6rem; font-weight: 900; border-bottom: 4px solid var(--primary-light); padding-bottom: 15px; margin-top: 0;}
+        h3 { color: var(--primary); font-size: 1.7rem; font-weight: 800; margin-top: 45px; border-bottom: 2px solid var(--border); padding-bottom: 12px; }
         p { line-height: 1.8; font-size: 1.15rem; color: var(--text-muted); margin-bottom: 25px; }
 
         /* --- Dashboard Grid --- */
         .hero { text-align: center; margin-bottom: 50px; }
-        .hero h1 { font-size: 3rem; border: none; color: var(--primary); padding: 0;}
-        .hero p { color: var(--text-muted); font-size: 1.25rem; max-width: 700px; margin: 15px auto 0 auto;}
+        .hero h1 { font-size: 3.2rem; border: none; color: var(--primary); padding: 0;}
+        .hero p { color: var(--text-muted); font-size: 1.25rem; max-width: 750px; margin: 15px auto 0 auto;}
         
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
         .module-card {
@@ -177,132 +199,185 @@
             text-align: center;
         }
         .module-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
-        .card-icon { font-size: 2.5rem; margin-bottom: 15px; background: var(--primary-light); width: 65px; height: 65px; display: inline-flex; align-items: center; justify-content: center; border-radius: 16px; }
-        .module-card h3 { margin: 0 0 10px 0; color: var(--text-main); font-size: 1.35rem; border: none; padding: 0;}
-        .module-card span { font-size: 1rem; color: var(--text-muted); font-weight: 600; background: var(--background); padding: 5px 12px; border-radius: 20px;}
+        .card-icon { font-size: 2.8rem; margin-bottom: 15px; background: var(--primary-light); width: 75px; height: 75px; display: inline-flex; align-items: center; justify-content: center; border-radius: 20px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);}
+        .module-card h3 { margin: 0 0 10px 0; color: var(--text-main); font-size: 1.4rem; border: none; padding: 0;}
+        .module-card span { font-size: 1rem; color: var(--text-muted); font-weight: 700; background: var(--background); padding: 6px 14px; border-radius: 20px;}
         
-        /* --- ⌨️ Mechanical Keyboard Key Styling ⌨️ --- */
+        /* --- ⌨️ Advanced Mechanical Keyboard Key Styling ⌨️ --- */
         .shortcut-list { margin-top: 25px; display: flex; flex-direction: column; gap: 18px; }
         .shortcut-item {
-            display: flex; align-items: center; padding: 18px 25px;
-            background-color: var(--background); border-radius: 12px;
-            border-left: 5px solid var(--accent); transition: transform 0.2s;
+            display: flex; align-items: center; padding: 20px 25px;
+            background: linear-gradient(to right, #f8fafc, #ffffff); border-radius: 12px;
+            border: 1px solid var(--border);
+            border-left: 6px solid var(--accent); transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
-        .shortcut-item:hover { transform: translateX(6px); background-color: var(--primary-light); }
+        .shortcut-item:hover { transform: translateX(6px); box-shadow: var(--shadow-md); border-color: #93c5fd; }
         
         .keys { flex: 0 0 45%; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;}
-        .action { flex: 1; font-size: 1.15rem; color: var(--text-main); font-weight: 600; line-height: 1.6;}
+        .action { flex: 1; font-size: 1.2rem; color: var(--text-main); font-weight: 600; line-height: 1.6;}
         
+        /* 3D Key Design */
         .kbd-style {
             display: inline-block;
-            background-color: #ffffff;
-            color: #1e293b;
-            border: 1px solid #94a3b8;
-            border-bottom: 4px solid #64748b;
+            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+            color: #0f172a;
+            border: 1px solid #cbd5e1;
+            border-bottom: 5px solid #94a3b8;
+            border-right: 2px solid #cbd5e1;
             border-radius: 8px;
-            padding: 6px 14px;
+            padding: 8px 16px;
             font-family: 'Courier New', Courier, monospace;
             font-weight: 900;
-            font-size: 1.1rem;
-            box-shadow: 0 3px 0 rgba(0,0,0,0.1);
+            font-size: 1.2rem;
+            box-shadow: 0 3px 4px rgba(0,0,0,0.1), inset 0 1px 0px white;
             letter-spacing: 0.5px;
+            text-shadow: 0 1px 0px rgba(255,255,255,0.8);
         }
 
-        .key-plus { font-weight: 900; color: var(--text-muted); font-size: 1.4rem; padding: 0 4px; }
+        .key-plus { font-weight: 900; color: var(--text-muted); font-size: 1.5rem; padding: 0 6px; }
 
         /* --- Game UI (Quiz) --- */
-        .quiz-container { text-align: center; padding: 30px; }
-        .score-board { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 12px 30px; border-radius: 30px; font-weight: 900; font-size: 1.5rem; margin-bottom: 30px; border: 2px solid var(--accent);}
-        .question-box { font-size: 1.8rem; color: var(--text-main); margin-bottom: 40px; font-weight: 700; padding: 30px; background: var(--background); border-radius: var(--radius); border: 3px dashed var(--border);}
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 700px; margin: 0 auto; }
+        .quiz-container { text-align: center; padding: 40px 30px; }
+        .score-board { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 12px 35px; border-radius: 30px; font-weight: 900; font-size: 1.6rem; margin-bottom: 30px; border: 2px solid var(--accent); box-shadow: var(--shadow-md);}
+        .question-box { font-size: 1.9rem; color: var(--text-main); margin-bottom: 40px; font-weight: 800; padding: 40px; background: var(--surface); border-radius: 20px; border: 3px dashed var(--accent); box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);}
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 800px; margin: 0 auto; }
         .option-btn {
-            background: var(--surface); border: 3px solid var(--border); padding: 20px; border-radius: var(--radius);
+            background: var(--surface); border: 3px solid var(--border); padding: 20px; border-radius: 16px;
             font-size: 1.2rem; cursor: pointer; transition: all 0.2s;
-            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 8px;
+            display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
-        .option-btn:hover { border-color: var(--accent); background: var(--primary-light); transform: translateY(-3px); }
-        .option-btn.correct { background: #d1fae5; border-color: var(--success); color: #065f46; }
+        .option-btn:hover { border-color: var(--accent); background: var(--primary-light); transform: translateY(-4px); box-shadow: var(--shadow-md);}
+        .option-btn.correct { background: #d1fae5; border-color: var(--success); color: #065f46; box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);}
         .option-btn.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; }
 
         /* --- Responsive Design --- */
         @media (max-width: 900px) {
-            .main-container { flex-direction: column; }
+            .main-container { flex-direction: column; height: auto; overflow: visible;}
             .sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding: 15px; border-right: none; border-bottom: 2px solid var(--border);}
             .sidebar.collapsed { display: none; }
             .nav-label { display: none; }
             .nav-btn { padding: 10px 20px; border-radius: 20px; border: 2px solid var(--border); margin-right: 10px;}
-            .content-area { padding: 20px 15px; }
+            .content-area { padding: 20px 15px; height: auto; overflow: visible;}
             .content-wrapper { padding: 30px 20px; }
             .shortcut-item { flex-direction: column; align-items: flex-start; gap: 15px; }
             .keys { width: 100%; }
             .options-grid { grid-template-columns: 1fr; }
-            .action-btns span { display: none; } /* Hide text on buttons for small screens */
+            .action-btns span { display: none; }
+            .watermark-bg { width: 70vw; }
         }
 
-        /* ========================================= */
-        /* 🖨️ SMART PDF & PRINT FORMATTING 🖨️        */
-        /* ========================================= */
+        /* ========================================================== */
+        /* 🖨️ SMART PDF & PRINT FORMATTING (FIXED) 🖨️               */
+        /* ========================================================== */
         @media print {
-            /* Force exact colors so the keys look like real keys in the PDF */
-            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            /* 1. Force background graphics, borders, and gradients to print */
+            * { 
+                -webkit-print-color-adjust: exact !important; 
+                print-color-adjust: exact !important; 
+            }
             
-            /* Set perfect A4 paper margins */
-            @page { size: A4 portrait; margin: 20mm; }
-
-            /* Hide UI elements not meant for the printed book */
-            .header, .sidebar, .hero, .btn-game, .btn-print { display: none !important; }
-            
-            /* Reset body and content area constraints */
-            body, .main-container, .content-area {
-                display: block; width: 100%; height: auto; margin: 0; padding: 0; overflow: visible; background: white;
+            /* 2. Set beautiful A4 margins */
+            @page { 
+                size: A4 portrait; 
+                margin: 15mm 15mm 20mm 15mm; 
             }
 
-            /* Make the wrapper take full width, remove shadows/borders */
+            /* 3. Disable all scrolling restrictions to allow full-page rendering */
+            body, html, .main-container, .content-area {
+                height: auto !important; 
+                width: 100% !important;
+                overflow: visible !important; 
+                display: block !important; 
+                background: white !important;
+                margin: 0 !important; 
+                padding: 0 !important;
+            }
+
+            /* 4. Hide all navigation and UI buttons */
+            .header, .sidebar, .hero, .btn-game, .btn-print, #sidebar-toggle { 
+                display: none !important; 
+            }
+
+            /* 5. Maximize the actual content wrapper to fill the paper */
             .content-wrapper { 
-                max-width: 100%; width: 100%; padding: 0; margin: 0; 
-                box-shadow: none; border: none; background: white;
+                max-width: 100% !important; 
+                width: 100% !important; 
+                padding: 0 !important; 
+                margin: 0 !important; 
+                box-shadow: none !important; 
+                border: none !important; 
+                background: transparent !important;
             }
 
-            /* Formatting text for print */
-            h1 { font-size: 24pt; color: #000; border-bottom: 2px solid #000; padding-bottom: 10px; }
-            h3 { font-size: 16pt; color: #000; margin-top: 25pt; border-bottom: 1px solid #ccc; }
-            p { font-size: 12pt; color: #333; margin-bottom: 15pt; }
+            /* 6. Typography adjustments for physical paper */
+            h1 { font-size: 26pt !important; color: #1e40af !important; border-bottom: 3px solid #1e40af !important; padding-bottom: 10px !important; margin-top: 0 !important; page-break-before: always; }
+            h1:first-of-type { page-break-before: avoid; }
+            h3 { font-size: 16pt !important; color: #000 !important; margin-top: 25pt !important; border-bottom: 1px solid #ccc !important; }
+            p { font-size: 12pt !important; color: #333 !important; margin-bottom: 15pt !important; }
 
-            /* Prevent shortcuts from breaking across two pages */
+            /* 7. Ensure Shortcut layout does not break across pages */
+            .shortcut-list { gap: 10px !important; margin-top: 15px !important;}
             .shortcut-item { 
-                page-break-inside: avoid; 
-                break-inside: avoid; 
-                border: 1px solid #e2e8f0; 
-                margin-bottom: 10pt;
+                page-break-inside: avoid !important; 
+                break-inside: avoid !important; 
+                border: 1px solid #cbd5e1 !important; 
+                border-left: 6px solid #3b82f6 !important;
+                margin-bottom: 10pt !important;
                 background-color: #f8fafc !important; 
+                padding: 12px 15px !important;
             }
             
-            .action { font-size: 12pt; color: #000; }
+            .action { font-size: 12pt !important; color: #000 !important; }
             
-            /* Ensure the keyboard buttons retain their styling in PDF */
+            /* 8. Make sure the Keyboard Buttons print with 3D graphics */
             .kbd-style {
-                background-color: #ffffff !important;
+                background: #ffffff !important;
                 border: 1px solid #64748b !important;
-                border-bottom: 3px solid #475569 !important;
+                border-bottom: 4px solid #475569 !important;
                 color: #000 !important;
+                box-shadow: none !important;
+                font-size: 11pt !important;
+                padding: 4px 10px !important;
+            }
+
+            /* 9. Watermark perfectly centered on every printed page */
+            .watermark-bg {
+                display: block !important;
+                opacity: 0.06 !important;
+                position: fixed !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: 60vw !important;
+                max-width: 500px !important;
+                z-index: -100 !important;
             }
         }
     </style>
 </head>
 <body>
 
+    <!-- Active Watermark -->
+    <!-- Make sure to replace YOUR_GITHUB_LOGO_URL.png with your actual logo file name (e.g., images/logo.png) -->
+    <img src="YOUR_GITHUB_LOGO_URL.png" alt="Watermark" class="watermark-bg" id="watermarkLogo" onerror="this.style.display='none'">
+
     <!-- Header -->
     <div class="header">
         <div class="brand">
-            <button class="toggle-btn" onclick="toggleSidebar()" title="Hide/Show Menu">
+            <button class="toggle-btn" onclick="toggleSidebar()" title="Hide/Show Menu" id="sidebar-toggle">
                 <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
+            <!-- Excellent Institute Logo Restored -->
+            <img src="YOUR_GITHUB_LOGO_URL.png" alt="Excellent Institute Logo" class="logo" id="mainLogo" onclick="loadDashboard()" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' fill=\'%231e40af\'><circle cx=\'50\' cy=\'50\' r=\'50\'/><text x=\'50\' y=\'65\' font-family=\'Arial\' font-size=\'40\' font-weight=\'bold\' fill=\'white\' text-anchor=\'middle\'>EI</text></svg>'">
             <h2 onclick="loadDashboard()">Excellent Institute</h2>
         </div>
         <div class="action-btns">
             <button class="btn-game" onclick="startQuiz()">🎮 <span>Play Quiz</span></button>
+            <!-- Triggers Browser Print for the CURRENT displayed chapter -->
             <button class="btn-print" onclick="window.print()">🖨️ <span>Print Chapter</span></button>
         </div>
     </div>
@@ -325,7 +400,7 @@
         </div>
     </div>
 
-    <!-- Load Data File -->
+    <!-- Link to the massive Shortcuts Data File -->
     <script src="shortcuts-data.js"></script>
     
     <script>
@@ -338,7 +413,7 @@
         // 1. Initialize Application
         function initApp() {
             if (typeof shortcutBookData === 'undefined') {
-                contentDisplay.innerHTML = `<div class="content-wrapper"><h2 style="color:var(--danger); text-align:center;">Error: Please ensure 'shortcuts-data.js' is in the same folder.</h2></div>`;
+                contentDisplay.innerHTML = `<div class="content-wrapper"><h2 style="color:var(--danger); text-align:center; padding: 40px;">Error: Please ensure 'shortcuts-data.js' is in the same folder.</h2></div>`;
                 return;
             }
             
@@ -383,7 +458,7 @@
                     <div class="module-card" onclick="document.querySelectorAll('.note-nav-btn')[${index}].click()">
                         <div class="card-icon">⌨️</div>
                         <h3>${chapter.title}</h3>
-                        <span>${chapter.topics.length} Topics</span>
+                        <span>${chapter.topics.length} Topics inside</span>
                     </div>`;
             });
 
@@ -392,7 +467,7 @@
             contentDisplay.scrollTop = 0;
         }
 
-        // 3. Load Chapter Content (This is what gets printed)
+        // 3. Load Chapter Content (This isolated view is what prints perfectly)
         function loadContent(index, clickedBtn) {
             // Update Active State in Sidebar
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -410,8 +485,8 @@
                 if(topic.shortcuts) {
                     html += `<div class="shortcut-list">`;
                     topic.shortcuts.forEach(sc => {
-                        // Generate the mechanical keys HTML
-                        let keysHtml = sc.keys.map(k => `<kbd class="kbd-style">${k}</kbd>`).join('<span class="key-plus"> + </span>');
+                        // Generate the 3D mechanical keys HTML
+                        let keysHtml = sc.keys.map(k => `<kbd class="kbd-style">${k}</kbd>`).join('<span class="key-plus">+</span>');
                         
                         html += `
                         <div class="shortcut-item">
@@ -439,7 +514,7 @@
         let currentQuestionObj = null;
 
         function formatKeysForQuiz(keyArray) {
-            return keyArray.map(k => `<kbd class="kbd-style" style="font-size:1rem; padding: 4px 10px;">${k}</kbd>`).join(' + ');
+            return keyArray.map(k => `<kbd class="kbd-style" style="font-size:1.1rem; padding: 6px 12px;">${k}</kbd>`).join(' <span style="color:#94a3b8; font-weight:bold;">+</span> ');
         }
 
         function startQuiz() {
@@ -450,28 +525,24 @@
         }
 
         function nextQuestion() {
-            // Pick a random shortcut to test
             const correctIndex = Math.floor(Math.random() * allShortcutsList.length);
             currentQuestionObj = allShortcutsList[correctIndex];
 
-            // Generate 3 random wrong answers
             let options = [currentQuestionObj];
             while (options.length < 4) {
                 let randomWrong = allShortcutsList[Math.floor(Math.random() * allShortcutsList.length)];
-                // Prevent duplicate options
                 if (!options.some(opt => JSON.stringify(opt.keys) === JSON.stringify(randomWrong.keys))) {
                     options.push(randomWrong);
                 }
             }
 
-            // Shuffle the options
             options.sort(() => Math.random() - 0.5);
 
             let html = `
             <div class="content-wrapper quiz-container">
                 <div class="score-board">🏆 Score: ${score}</div>
-                <h2 style="font-size:2.2rem; color:var(--primary); margin-top:0;">Shortcut Challenge!</h2>
-                <p style="color: var(--text-muted); margin-bottom: 30px; font-size:1.2rem;">Read the action below and select the correct keyboard shortcut.</p>
+                <h2 style="font-size:2.4rem; color:var(--primary); margin-top:0;">Shortcut Challenge!</h2>
+                <p style="color: var(--text-muted); margin-bottom: 40px; font-size:1.25rem;">Read the action below and select the correct keyboard shortcut.</p>
                 
                 <div class="question-box">
                     "${currentQuestionObj.action}"
@@ -487,31 +558,29 @@
 
             html += `
                 </div>
-                <button id="next-q-btn" onclick="nextQuestion()" style="display:none; margin-top: 40px; background: var(--primary); color: white; padding: 15px 40px; border:none; border-radius:12px; font-size:1.2rem; cursor:pointer; font-weight:800; box-shadow: var(--shadow-md);">Next Question ➔</button>
+                <button id="next-q-btn" onclick="nextQuestion()" style="display:none; margin-top: 50px; background: var(--primary); color: white; padding: 16px 45px; border:none; border-radius:12px; font-size:1.3rem; cursor:pointer; font-weight:900; box-shadow: var(--shadow-lg); transition: transform 0.2s;">Next Question ➔</button>
             </div>`;
 
             contentDisplay.innerHTML = html;
         }
 
         function checkAnswer(selectedKeysStr, correctKeysStr, btnElement) {
-            // Disable all buttons after clicking
             const allBtns = document.querySelectorAll('.option-btn');
             allBtns.forEach(b => b.style.pointerEvents = 'none');
 
             if (selectedKeysStr === correctKeysStr) {
                 btnElement.classList.add('correct');
-                btnElement.innerHTML += ' <span style="font-size:1.5rem;">✅</span>';
+                btnElement.innerHTML += ' <span style="font-size:1.6rem; margin-left:8px;">✅</span>';
                 score += 10;
                 document.querySelector('.score-board').innerText = `🏆 Score: ${score}`;
             } else {
                 btnElement.classList.add('wrong');
-                btnElement.innerHTML += ' <span style="font-size:1.5rem;">❌</span>';
+                btnElement.innerHTML += ' <span style="font-size:1.6rem; margin-left:8px;">❌</span>';
                 
-                // Show the correct answer
                 allBtns.forEach(b => {
                     if(b.innerHTML.includes(formatKeysForQuiz(JSON.parse(correctKeysStr)))) {
                         b.classList.add('correct');
-                        b.innerHTML += ' <span style="font-size:1.5rem;">✅</span>';
+                        b.innerHTML += ' <span style="font-size:1.6rem; margin-left:8px;">✅</span>';
                     }
                 });
             }
